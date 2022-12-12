@@ -1,0 +1,28 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:capstone-m6-t11-grupo10/back-end.git",
+  "author": "Izamara Agata <izamaraa13contas@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev src/app.ts",
+    "typeorm": "typeorm-ts-node-commonjs"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/node": "^18.11.13",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.13",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg": "^8.8.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.11",
+    "uuid": "^9.0.0"
+  }
+}
