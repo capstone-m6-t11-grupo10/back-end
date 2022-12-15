@@ -4,9 +4,10 @@ import {
     PrimaryGeneratedColumn,
     ManyToOne,
     OneToOne,
+    OneToMany,
 } from 'typeorm';
+import { Comment } from './comment.entity';
 
-import { Post } from './post.entity';
 import { User } from './user.entity';
 
 @Entity('vehicles')
@@ -35,8 +36,17 @@ export class Vehicle {
     @Column({ length: 4 })
     year: string;
 
-    @OneToOne(() => Post, (post) => post.vehicle)
-    post: Post;
+    @Column()
+    title: string;
+
+    @Column()
+    description: string;
+
+    @Column()
+    isActive: boolean;
+
+    @OneToMany(() => Comment, (comment) => comment.vehicle)
+    comments: Comment[];
 
     @ManyToOne(() => User, (user) => user.vehicles)
     user: User;

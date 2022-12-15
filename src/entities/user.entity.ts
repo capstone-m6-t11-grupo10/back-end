@@ -9,7 +9,6 @@ import {
 
 import { Address } from './address.entity';
 import { Comment } from './comment.entity';
-import { Post } from './post.entity';
 import { Vehicle } from './vehicle.entity';
 
 @Entity('users')
@@ -50,9 +49,6 @@ export class User {
     @OneToOne(() => Address, (address) => address.user)
     @JoinColumn()
     address: Address;
-
-    @OneToMany(() => Post, (post) => post.user)
-    posts: Post[];
 
     @OneToMany(() => Vehicle, (vehicle) => vehicle.user)
     vehicles: Vehicle[];
