@@ -1,30 +1,54 @@
-import { DataSource } from 'typeorm';
-import 'dotenv/config';
+import { DataSource } from "typeorm"
+import "dotenv/config"
 
-export const AppDataSource = new DataSource({
-    type: 'postgres',
+const AppDataSource = new DataSource(
+  process.env.NODE_ENV === "test"
+    ? {
+        type: "sqlite",
+        database: ":memory:",
+        synchronize: true,
+        entities: ["src/entities/*.ts"],
+      }
+    : {
+        type: "postgres",
+        host: process.env.DB_HOST,
+        port: 5432,
+        username: process.env.POSTGRES_USER,
+        password: process.env.POSTGRES_PWD,
+        database: process.env.POSTGRES_DB,
+        logging: true,
+        synchronize: false,
+        entities: ["src/entities/*.ts"],
+        migrations: ["src/migrations/*.ts"],
+      }
+)
 
-    host: 'localhost',
+export default AppDataSource
 
-    port: 5432,
+// export const AppDataSource = new DataSource({
+//     type: 'postgres',
 
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PWD,
-    database: process.env.POSTGRES_DB,
+//     host: 'localhost',
 
-    synchronize: false,
+//     port: 5432,
 
-    logging: true,
+//     username: process.env.POSTGRES_USER,
+//     password: process.env.POSTGRES_PWD,
+//     database: process.env.POSTGRES_DB,
 
-    entities: ['src/entities/*.ts'],
+//     synchronize: false,
 
-    migrations: ['src/migrations/*.ts'],
-});
+//     logging: true,
 
-AppDataSource.initialize()
-    .then(() => {
-        console.log('Data Source initialized');
-    })
-    .catch((err) => {
-        console.error('Error during Data Source initialization', err);
-    });
+//     entities: ['src/entities/*.ts'],
+
+//     migrations: ['src/migrations/*.ts'],
+// });
+
+// AppDataSource.initialize()
+//     .then(() => {
+//         console.log('Data Source initialized');
+//     })
+//     .catch((err) => {
+//         console.error('Error during Data Source initialization', err);
+//     });
