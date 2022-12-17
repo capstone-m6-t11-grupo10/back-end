@@ -5,14 +5,14 @@ export interface IUser {
   id: string
   name: string
   birthDate: Date
-  image: string
+  image?: string
   email: string
-  phone: string
+  phone?: string
   password: string
   cpf: string
   isActive: boolean
   isSeller: boolean
-  bio: string
+  bio?: string
   address: IAddressRequest
   vehicles: []
   //   comments: IComments[]
