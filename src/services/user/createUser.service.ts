@@ -7,7 +7,6 @@ import { IUserRequest } from "../../interfaces/user"
 export const createUserService = async ({
   name,
   email,
-  address,
   cpf,
   password,
   isSeller,
@@ -33,7 +32,6 @@ export const createUserService = async ({
       password: hashedPassword,
       cpf,
       isSeller: true,
-      address,
     })
 
     await userRepository.save(newSeller)
@@ -46,8 +44,6 @@ export const createUserService = async ({
     email,
     password: hashedPassword,
     cpf,
-    isSeller: false,
-    address,
   })
 
   await userRepository.save(normalUser)

@@ -24,10 +24,6 @@ export interface IUserRequest {
   cpf: string
   password: string
   isSeller: boolean
-  birthDate?: Date
-  phone?: string
-  bio?: string
-  address: IAddressRequest
 }
 
 export interface IUserLogin {
