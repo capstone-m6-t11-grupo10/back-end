@@ -51,3 +51,4 @@ export class Vehicle {
     @ManyToOne(() => User, (user) => user.vehicles)
     user: User;
 }
+

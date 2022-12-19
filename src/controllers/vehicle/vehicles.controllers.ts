@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
-import { createVehicleService } from "../services/vehicles/createVehicle";
-import { listVehicleService } from "../services/vehicles/listVehices";
+import { IReqCreateVehicle } from "../../interfaces/vehicle";
+import { createVehicleService } from "../../services/vehicles/createVehicle";
+import { listVehicleService } from "../../services/vehicles/listVehicles";
 
 export const createVehicleController = async (req: Request, res: Response) => {
-    const data = req.body;
+    const data: IReqCreateVehicle = req.body;
     const response = await createVehicleService(data);
     return res.status(201).json(response);
 };
