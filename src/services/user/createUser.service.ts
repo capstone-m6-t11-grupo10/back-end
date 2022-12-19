@@ -2,10 +2,11 @@ import { hash } from "bcryptjs"
 import AppDataSource from "../../data-source"
 import { User } from "../../entities/user.entity"
 import { AppError } from "../../errors/appError"
-import { IUser, IUserRequest } from "../../interfaces/user"
+import { IUserRequest } from "../../interfaces/user"
 
 export const createUserService = async ({
   name,
+  birthDate,
   image,
   email,
   phone,
@@ -13,7 +14,7 @@ export const createUserService = async ({
   cpf,
   isSeller,
   bio,
-}: IUser): Promise<User> => {
+}: IUserRequest): Promise<User> => {
   const userRepository = AppDataSource.getRepository(User)
 
   const userAlreadyExists = await userRepository.findOne({
@@ -31,11 +32,12 @@ export const createUserService = async ({
   if (isSeller) {
     const newSeller = userRepository.create({
       name,
-      image,
       email,
+      cpf,
+      birthDate,
+      image,
       phone,
       password: hashedPassword,
-      cpf,
       isSeller: true,
       bio,
     })
@@ -47,12 +49,13 @@ export const createUserService = async ({
 
   const normalUser = userRepository.create({
     name,
-    image,
     email,
+    cpf,
+    birthDate,
     phone,
     password: hashedPassword,
-    cpf,
     bio,
+    image,
   })
 
   await userRepository.save(normalUser)
