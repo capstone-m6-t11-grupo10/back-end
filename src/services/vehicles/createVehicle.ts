@@ -1,6 +1,6 @@
-import { AppDataSource } from "../../data-source";
+import AppDataSource from "../../data-source";
 import { Vehicle } from "../../entities/vehicle.entity";
-import { IReqCreateVehicle } from "../../interfaces";
+import { IReqCreateVehicle } from "../../interfaces/vehicle";
 
 export const createVehicleService = async (data: IReqCreateVehicle) => {
     const VehicleRepo = AppDataSource.getRepository(Vehicle)

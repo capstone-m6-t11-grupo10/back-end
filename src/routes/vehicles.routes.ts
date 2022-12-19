@@ -1,9 +1,12 @@
 import { Router } from "express";
+import { createVehicleController, listVehiclesController } from "../controllers/vehicle/vehicles.controllers";
 
-const vehiclesRoutes = Router();
+const routes = Router();
 
-// vehiclesRoutes.post("/:userId", createContactController);
-// vehiclesRoutes.post("/:userId", createContactController);
-// vehiclesRoutes.get("", listVehiclesController);
+export const vehiclesRoutes = () => {
+    // routes.post("/:userId", createVehicleController);
+    routes.post("", createVehicleController);
+    routes.get("", listVehiclesController);
+    return routes
+}
 
-// export default contactsRoutes;
