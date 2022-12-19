@@ -21,6 +21,6 @@ export interface IUserRequest {
 
 export interface IUserLogin {
   email: string
-  senha: string
+  password: string
 }
 
