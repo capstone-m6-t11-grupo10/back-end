@@ -6,7 +6,7 @@ import { IUserLogin } from "../interfaces/user"
 
 YupPassword(yup)
 
-export const userSchema: SchemaOf<IUserLogin> = yup.object().shape({
+export const loginSchema: SchemaOf<IUserLogin> = yup.object().shape({
   email: yup
     .string()
     .email()

@@ -5,10 +5,10 @@ import { listUsersController } from "../controllers/user/listUsers.controller"
 import { softDeleteUserController } from "../controllers/user/softDeleteUser.controller"
 import { updateUserController } from "../controllers/user/updateUser.controller"
 
-// import { schemaValidation } from "../middlewares/schemaValidation.middleware"
 import { authTokenMiddleware } from "../middlewares/authToken.middleware"
+import { schemaValidation } from "../middlewares/schemaValidatio.middleware"
 
-// import { userSchema } from "../schemas/user.schema"
+import { userSchema } from "../schemas/user.schema"
 
 const routes = Router()
 
