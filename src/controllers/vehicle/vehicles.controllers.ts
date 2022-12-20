@@ -4,11 +4,11 @@ import { createVehicleService } from "../../services/vehicles/createVehicle";
 import { createVehicleServiceNoUser } from "../../services/vehicles/createVehicle.noUser";
 import { listVehicleService } from "../../services/vehicles/listVehicles";
 
-export const createVehicleControllerNoUser = async (req: Request, res: Response) => {
-    const data: IReqCreateVehicle = req.body;
-    const response = await createVehicleServiceNoUser(data);
-    return res.status(201).json(response);
-};
+// export const createVehicleControllerNoUser = async (req: Request, res: Response) => {
+//     const data: IReqCreateVehicle = req.body;
+//     const response = await createVehicleServiceNoUser(data);
+//     return res.status(201).json(response);
+// };
 export const createVehicleController = async (req: Request, res: Response) => {
     const data: IReqCreateVehicle = req.body;
     const userId = req.params.userId
