@@ -1,4 +1,18 @@
 import {
+
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToOne,
+  OneToMany,
+} from "typeorm";
+import { Comment } from "./comment.entity";
+
+import { User } from "./user.entity";
+
+@Entity("vehicles")
+
     Entity,
     Column,
     PrimaryGeneratedColumn,
@@ -12,43 +26,52 @@ import { User } from './user.entity';
 import { Images } from './images.entity';
 
 @Entity('vehicles')
+
 export class Vehicle {
-    @PrimaryGeneratedColumn('uuid')
-    readonly id: string;
+  @PrimaryGeneratedColumn("uuid")
+  readonly id: string;
 
-    @Column({ length: 15 })
-    color: string;
+  @Column({ length: 15 })
+  color: string;
 
-    @Column()
-    type: string;
+  @Column()
+  type: string;
 
-    @Column()
-    price: string;
+  @Column()
+  price: string;
 
-    @Column({ unique: true })
-    plate: string;
+  @Column({ unique: true })
+  plate: string;
 
-    @Column()
-    km: number;
+  @Column()
+  image: string;
 
-    @Column({ length: 4 })
-    year: string;
+  @Column()
+  km: number;
 
-    @Column()
-    title: string;
+  @Column({ length: 4 })
+  year: string;
 
-    @Column()
-    description: string;
+  @Column()
+  title: string;
 
-    @Column()
-    isActive: boolean;
+  @Column()
+  description: string;
 
-    @OneToMany(() => Comment, (comment) => comment.vehicle)
-    comments: Comment[];
+  @Column()
+  isActive: boolean;
+
+  @OneToMany(() => Comment, (comment) => comment.vehicle)
+  comments: Comment[];
+
+
+  @ManyToOne(() => User, (user) => user.vehicles, { eager: true })
+  user: User;
 
     @OneToMany(() => Images, (image) => image.vehicle)
     images: Images[];
 
     @ManyToOne(() => User, (user) => user.vehicles)
     user: User;
+
 }
