@@ -9,6 +9,7 @@ import {
 import { Comment } from './comment.entity';
 
 import { User } from './user.entity';
+import { Images } from './images.entity';
 
 @Entity('vehicles')
 export class Vehicle {
@@ -28,9 +29,6 @@ export class Vehicle {
     plate: string;
 
     @Column()
-    image: string;
-
-    @Column()
     km: number;
 
     @Column({ length: 4 })
@@ -48,7 +46,9 @@ export class Vehicle {
     @OneToMany(() => Comment, (comment) => comment.vehicle)
     comments: Comment[];
 
+    @OneToMany(() => Images, (image) => image.vehicle)
+    images: Images[];
+
     @ManyToOne(() => User, (user) => user.vehicles)
     user: User;
 }
-
