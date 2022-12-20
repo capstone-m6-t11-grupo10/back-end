@@ -1,4 +1,5 @@
 import {
+
   Entity,
   Column,
   PrimaryGeneratedColumn,
@@ -11,6 +12,21 @@ import { Comment } from "./comment.entity";
 import { User } from "./user.entity";
 
 @Entity("vehicles")
+
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    ManyToOne,
+    OneToOne,
+    OneToMany,
+} from 'typeorm';
+import { Comment } from './comment.entity';
+
+import { User } from './user.entity';
+import { Images } from './images.entity';
+
+@Entity('vehicles')
+
 export class Vehicle {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
@@ -48,6 +64,14 @@ export class Vehicle {
   @OneToMany(() => Comment, (comment) => comment.vehicle)
   comments: Comment[];
 
+
   @ManyToOne(() => User, (user) => user.vehicles, { eager: true })
   user: User;
+
+    @OneToMany(() => Images, (image) => image.vehicle)
+    images: Images[];
+
+    @ManyToOne(() => User, (user) => user.vehicles)
+    user: User;
+
 }
