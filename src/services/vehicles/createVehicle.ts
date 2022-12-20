@@ -1,14 +1,18 @@
 import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
 import { Vehicle } from "../../entities/vehicle.entity";
-import { IReqCreateVehicle } from "../../interfaces/vehicle";
 
-export const createVehicleService = async (data: IReqCreateVehicle) => {
+export const createVehicleService = async (data: any) => {
     const VehicleRepo = AppDataSource.getRepository(Vehicle)
+    const UserRepo = AppDataSource.getRepository(User)
 
-    const vehicleCreated = await VehicleRepo.save(data)
-    const vehicleId = vehicleCreated.id
+    const { userId, ...restData } = data
 
+    const user = await UserRepo.findOneBy({ id: userId })
 
-    const vehicle = await VehicleRepo.findOneBy({ id: vehicleId });
-    return vehicle
+    restData.user = user
+
+    const vehicleCreated = await VehicleRepo.save(restData)
+
+    return vehicleCreated
 }
