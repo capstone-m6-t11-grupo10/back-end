@@ -8,5 +8,6 @@ export interface IReqCreateVehicle {
     "year": string,
     "title": string,
     "description": string,
-    "isActive": boolean
+    "isActive": boolean,
+    "userId"?: string
 }
