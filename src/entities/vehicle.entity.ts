@@ -29,9 +29,6 @@ export class Vehicle {
   plate: string;
 
   @Column()
-  image: string;
-
-  @Column()
   km: number;
 
   @Column({ length: 4 })
@@ -52,6 +49,6 @@ export class Vehicle {
   @ManyToOne(() => User, (user) => user.vehicles, { eager: true })
   user: User;
 
-  @OneToMany(() => Images, (image) => image.vehicle)
+  @OneToMany(() => Images, (image) => image.vehicle, { eager: true })
   images: Images[];
 }
