@@ -1,19 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn,
+} from "typeorm";
 
-import { User } from './user.entity';
-import { Vehicle } from './vehicle.entity';
+import { User } from "./user.entity";
+import { Vehicle } from "./vehicle.entity";
 
-@Entity('comments')
+@Entity("comments")
 export class Comment {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @Column()
-    content: string;
+  @Column()
+  content: string;
 
-    @ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)
-    vehicle: Vehicle;
+  @CreateDateColumn()
+  dateCreated: Date;
 
-    @ManyToOne(() => User, (user) => user.comments)
-    user: User;
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)
+  vehicle: Vehicle;
+
+  @ManyToOne(() => User, (user) => user.comments)
+  user: User;
 }
