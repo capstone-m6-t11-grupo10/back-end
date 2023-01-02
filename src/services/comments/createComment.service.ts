@@ -5,7 +5,8 @@ import { Vehicle } from "../../entities/vehicle.entity";
 import { IUserComment } from "../../interfaces/comments";
 
 export const createCommentService = async ({
-  userId,
+  id,
+  //id é o id do usuario
   vehicleId,
   content,
 }: IUserComment) => {
@@ -13,12 +14,14 @@ export const createCommentService = async ({
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
   const commentRepository = AppDataSource.getRepository(Comment);
 
-  const userExists = await userRepository.findOne({ where: { id: userId } });
+  const userExists = await userRepository.findOne({ where: { id: id } });
+  //id é o id do usuario
   if (!userExists) {
     throw new Error(`User does not exist`);
   }
   const vehicleExists = await vehicleRepository.findOne({
     where: { id: vehicleId },
+    //id é o id do veiculo
   });
   if (!vehicleExists) {
     throw new Error(`Vehicle does not exist`);

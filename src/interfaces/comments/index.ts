@@ -1,5 +1,5 @@
 export interface IUserComment {
-  userId: string;
+  id: string;
   vehicleId: string;
   content: string;
 }
