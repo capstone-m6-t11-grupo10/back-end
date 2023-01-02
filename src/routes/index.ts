@@ -9,5 +9,5 @@ export const appRoutes = (app: Express) => {
   app.use("/users", usersRoutes());
   app.use("/vehicles", vehiclesRoutes());
   app.use("/login", loginRoutes());
-  app.use("/comments", commentsRoutes);
+  app.use("/comments", commentsRoutes());
 };

@@ -5,6 +5,6 @@ import { authTokenMiddleware } from "../middlewares/authToken.middleware";
 const routes = Router();
 
 export const commentsRoutes = () => {
-  routes.post("", authTokenMiddleware, createCommentController);
+  routes.post("/:id", authTokenMiddleware, createCommentController);
   return routes;
 };
