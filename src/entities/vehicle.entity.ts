@@ -43,7 +43,7 @@ export class Vehicle {
   @Column()
   isActive: boolean;
 
-  @OneToMany(() => Comment, (comment) => comment.vehicle)
+  @OneToMany(() => Comment, (comment) => comment.vehicle, { eager: true })
   comments: Comment[];
 
   @ManyToOne(() => User, (user) => user.vehicles, { eager: true })
