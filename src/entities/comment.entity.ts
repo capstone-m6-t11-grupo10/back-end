@@ -15,7 +15,7 @@ export class Comment {
   id: string;
 
   @Column()
-  content: string;
+  comment: string;
 
   @CreateDateColumn()
   dateCreated: Date;

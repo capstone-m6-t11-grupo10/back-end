@@ -8,32 +8,29 @@ export const createCommentService = async ({
   id,
   //id é o id do usuario
   vehicleId,
-  content,
+  comment,
 }: IUserComment) => {
   const userRepository = AppDataSource.getRepository(User);
   const vehicleRepository = AppDataSource.getRepository(Vehicle);
   const commentRepository = AppDataSource.getRepository(Comment);
 
-  const userExists = await userRepository.findOne({ where: { id: id } });
+  const user = await userRepository.findOneBy({ id: id });
   //id é o id do usuario
-  if (!userExists) {
+  if (!user) {
     throw new Error(`User does not exist`);
   }
-  const vehicleExists = await vehicleRepository.findOne({
-    where: { id: vehicleId },
-    //id é o id do veiculo
-  });
-  if (!vehicleExists) {
+  const vehicle = await vehicleRepository.findOneBy({ id: vehicleId });
+  if (!vehicle) {
     throw new Error(`Vehicle does not exist`);
   }
 
-  const comment = new Comment();
-  comment.content = content;
-  comment.vehicle = vehicleExists;
-  comment.user = userExists;
+  const newComment = commentRepository.create({
+    comment: comment,
+    user: user,
+    vehicle: vehicle,
+  });
 
-  commentRepository.create(comment);
-  await commentRepository.save(comment);
+  await commentRepository.save(newComment);
 
-  return comment;
+  return newComment;
 };
