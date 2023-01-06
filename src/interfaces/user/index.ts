@@ -1,5 +1,4 @@
-// import { IAddressRequest } from "../address"
-// import { IComments } from "../comments"
+import { IAddressRequest } from "../address"
 
 export interface IUserRequest {
     name: string;
@@ -12,9 +11,7 @@ export interface IUserRequest {
     isSeller?: boolean;
     bio: string;
     image?: string;
-    // address?: IAddressRequest
-    // vehicles?: []
-    // comments: IComments[]
+    address: IAddressRequest
 }
 
 export interface IUserLogin {

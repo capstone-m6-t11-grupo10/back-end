@@ -5,5 +5,4 @@ export interface IAddressRequest {
   cep: string
   city: string
   state: string
-  country: string
 }
