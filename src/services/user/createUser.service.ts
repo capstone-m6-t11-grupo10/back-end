@@ -49,6 +49,7 @@ export const createUserService = async ({
     })
     await addressRepository.save(newAddress)
     newSeller.address = newAddress
+    await userRepository.save(newSeller)
     return newSeller
   }
 
@@ -66,6 +67,7 @@ export const createUserService = async ({
     ...address,
   })
   await addressRepository.save(newAddress)
+  await userRepository.save(normalUser)
   normalUser.address = newAddress
   return normalUser
 }
