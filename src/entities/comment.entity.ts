@@ -23,6 +23,6 @@ export class Comment {
   @ManyToOne(() => Vehicle, (vehicle) => vehicle.comments)
   vehicle: Vehicle;
 
-  @ManyToOne(() => User, (user) => user.comments)
+  @ManyToOne(() => User, (user) => user.comments, { eager: true })
   user: User;
 }
