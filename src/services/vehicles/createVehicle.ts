@@ -1,28 +1,51 @@
-import AppDataSource from "../../data-source";
-import { Images } from "../../entities/images.entity";
-import { User } from "../../entities/user.entity";
-import { Vehicle } from "../../entities/vehicle.entity";
+import AppDataSource from '../../data-source';
+import { Images } from '../../entities/images.entity';
+import { User } from '../../entities/user.entity';
+import { Vehicle } from '../../entities/vehicle.entity';
 
-export const createVehicleService = async (data: any) => {
-    const VehicleRepo = AppDataSource.getRepository(Vehicle)
-    const ImageRepo = AppDataSource.getRepository(Images)
-    const UserRepo = AppDataSource.getRepository(User)
-
-    const { userId, images, ...restData } = data
-
-    const userFinded = await UserRepo.findOneBy({ id: userId })
-    restData.user = userFinded
-
-    const vehicleCreated = await VehicleRepo.save(restData)
-
-    images.forEach(async (img: string) => {
-        const actualImage = await ImageRepo.save({ image: img, vehicle: vehicleCreated })
-        await ImageRepo.save(actualImage)
-    })
-
-    await VehicleRepo.save(vehicleCreated)
-
-    const { user, ...vehicle } = vehicleCreated
-
-    return vehicle
+interface ICreateVehicle {
+    userId: string;
+    color: string;
+    type: string;
+    price: string;
+    plate: string;
+    images: string[];
+    km: number;
+    year: string;
+    title: string;
+    description: string;
+    isActive: boolean;
+    user: User;
 }
+
+export const createVehicleService = async (data: ICreateVehicle) => {
+    const VehicleRepo = AppDataSource.getRepository(Vehicle);
+    const ImageRepo = AppDataSource.getRepository(Images);
+    const UserRepo = AppDataSource.getRepository(User);
+
+    const { userId, images, ...restData } = data;
+
+    const userFound = await UserRepo.findOneBy({ id: userId });
+
+    if (!userFound) {
+        throw new Error('User not found');
+    }
+
+    restData.user = userFound;
+
+    const vehicleCreated = VehicleRepo.create(restData);
+
+    const imagesPromise = images.map(async (image: string) => {
+        const teste = ImageRepo.create({ image });
+
+        return ImageRepo.save(teste);
+    });
+
+    Promise.all(imagesPromise).then((res) => (vehicleCreated.images = res));
+
+    await VehicleRepo.save(vehicleCreated);
+
+    const { user, ...vehicle } = vehicleCreated;
+
+    return vehicle;
+};

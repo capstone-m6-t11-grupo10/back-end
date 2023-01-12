@@ -9,6 +9,6 @@ export class Images {
     @Column()
     image: string;
 
-    @ManyToOne(() => Vehicle, (vehicle) => vehicle.images)
+    @ManyToOne(() => Vehicle, (vehicle) => vehicle.images, { eager: true })
     vehicle: Vehicle;
 }
