@@ -3,6 +3,7 @@ import { Vehicle } from '../../entities/vehicle.entity';
 
 export const listVehicleService = async () => {
     const VehicleRepo = AppDataSource.getRepository(Vehicle);
+
     const vehicles = await VehicleRepo.find({ relations: { images: true } });
 
     const carros = vehicles.filter((vehicle) => vehicle.type === 'carro');

@@ -16,17 +16,11 @@ export class Vehicle {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string;
 
-    @Column({ length: 15 })
-    color: string;
-
     @Column()
     type: string;
 
     @Column()
     price: string;
-
-    @Column({ unique: true })
-    plate: string;
 
     @Column()
     km: number;
