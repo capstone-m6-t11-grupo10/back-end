@@ -5,10 +5,8 @@ import { Vehicle } from '../../entities/vehicle.entity';
 
 interface ICreateVehicle {
     userId: string;
-    color: string;
     type: string;
     price: string;
-    plate: string;
     images: string[];
     km: number;
     year: string;
